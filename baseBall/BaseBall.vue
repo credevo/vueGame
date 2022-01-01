@@ -33,12 +33,7 @@
         },
         methods : {
             onSubmit(e){
-                //정답을 맞췄을때는 정답 형태로 표시하고
 
-                //정답이 아닐때는 누적해서 string으로 보여줘라.
-                // result에 담긴 for문으로 보여줄거야^0^
-                let ball  = 0;
-                let strike = 0;
                 // validate
                 if(this.value && this.value.length ==4){
                     if(this.value == this.answer.join('')){
@@ -47,13 +42,15 @@
                         this.value ='';
                         this.answer = getNumbers();
                     }else{
+                        let ball  = 0;
+                        let strike = 0;
                         this.value.split('').forEach((numStr,index)=>{
                             if(this.answer[index]==parseInt(numStr)){
                                 strike++;
                             }else if(this.answer.includes(parseInt(numStr))){ 
                                 ball++;
                             }else{
-
+                                return;
                             }
                         })
                         this.result.push(this.value + 'strike:' + strike + ' ball:'+ball);

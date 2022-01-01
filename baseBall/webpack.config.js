@@ -36,3 +36,19 @@ module.exports = {
 
 // 특정 버전 lib install
 // npm i vue@1.1.1 형식으로
+
+// Babel 은 javascript 최신 문법 사용할때나,
+// 오래된 ie 를 지원하기 위해 setting 해야 한다.
+// 현재는 필요가 없다.
+
+/**
+ * node의 모듈 시스템
+ * require(...);
+ * module.exports={...}
+ * 
+ */
+/**
+ * javascript의 모듈 시스템
+ * import ... from '...';
+ * export default{...}
+ */
