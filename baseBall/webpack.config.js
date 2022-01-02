@@ -1,4 +1,6 @@
-
+/**
+ * 어떤 파일이든 javascript 파일로 합치는게 webpack의 장점
+ */
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const path  = require('path');
 const { Hmac } = require('crypto');
@@ -52,3 +54,4 @@ module.exports = {
  * import ... from '...';
  * export default{...}
  */
+
