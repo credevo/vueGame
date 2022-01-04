@@ -1,25 +1,30 @@
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const path  = require('path');
-const { Hmac } = require('crypto');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     mode : 'development',
-    devtool :'eval', //개발용
     resolve : {
         extensions : ['.js','.vue']
     },
     entry : {
-        app : path.join(__dirname, 'main.js'),
+        app : path.join(__dirname, 'main.js'), 
     },
-    module :{
+    module :{ //javascript가 아닐때 loader들의 역할
         rules : [
-            {test :/\.vue$/, loader : 'vue-loader'}
+            {test :/\.vue$/, loader : 'vue-loader'},
+            {test :/\.css$/, use :['vue-style-loader','css-loader']}, // .. sass loader ...
         ],
     },
-    plugins :[new VueLoaderPlugin()],
+    plugins :[
+        new VueLoaderPlugin(),
+        new HtmlWebpackPlugin({
+            template : './ResponseCheck.html'
+        })
+    ],
     output : {
-        filename : '[name].js',
-        path : path.join(__dirname,'dist')
+        path : path.join(__dirname,'dist'),
+        filename : '[name].js',  // name이라는 변수가 들어오는데, entry에 적용한 key값인 app이 들어온다. name : app 이다.
     },
-    
+
 } 
