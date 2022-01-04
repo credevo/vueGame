@@ -1,17 +1,25 @@
 <template>
 <div>
    <div id="screen" :class="state" @click="onClickScreen" >{{message}}</div>
-   <div>
-       <div>평균 시간 : {{result.reduce((o,n)=>o+n,0)/result.length || 0}} </div>
+   <div v-show="result.length">
+       <!-- 태그 display:none -->
+       <div>평균 시간 : {{average}} </div>
        <button @click="onReset">리셋</button>
-       <div>12</div>
+       <div>{{result}}</div>
    </div>
+   <template v-if="result.length">
+       <!-- 태그 자체가 안보임 -->
+       <div>평균 시간 : {{average}} </div>
+       <button @click="onReset">리셋</button>
+       <div>{{result}}</div>
+   </template>
 </div>
 </template>
 <script>
     let startTime = 0;
     let endTime = 0;
     let timeOut = null;
+    //
     export default{
         data(){
             return{
@@ -22,13 +30,12 @@
             }
         },
         computed : {
-            computedClass(){
-                return this.state;
+            // computed는 캐싱되는데, dom이 다시 그려지는 때는 화면의 data가 변경될때 생기는데,
+            // computed에 해당하는 data가 변경이 없는경우는 그대로 보이니깐 성능상으로 이점으로
+            // 가져갈수 있게 된다. 
+            average(){
+                return this.result.reduce((o,n)=>o+n,0)/this.result.length || 0;
             }
-        },
-        created(){
-            // const random 
-            // const interValId = setInterval(003,)
         },
         methods : {
             onReset(){
@@ -39,14 +46,15 @@
                     case 'waiting' : 
                         this.state = 'ready';
                         this.message= '초록색이 되면 클릭하세요';
-                        setTimeout(()=>{
+                        timeOut = setTimeout(()=>{
                             this.state = 'now';
                             startTime = new Date();
                         }, parseInt(Math.random()*1000+2000)) //2~3초 사이 랜덤
                         break;
                     case 'ready' :
+                        console.log(1);
                         clearTimeout(timeOut);
-                        this.state='now';
+                        this.state='waiting';
                         this.message= '너무 성급하시군요! 초록색이 된후에 클릭하세요';
                         break;
                     case 'now' :
