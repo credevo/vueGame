@@ -19,7 +19,7 @@ module.exports = {
     plugins :[
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
-            template : './RockPaperScissors.html'
+            template : './LottoGame.html'
         })
     ],
     output : {
