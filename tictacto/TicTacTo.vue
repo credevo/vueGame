@@ -1,12 +1,12 @@
 
 <template>
     <div>
-        <table-component/>
+        <table-component :table-data="tableData"/>
     </div>
 </template>
 
 <script>  
-    import TableComponent from './TableComponent.vue'
+    import TableComponent from './components/TableComponent.vue'
     export default {
         components : {
             TableComponent
@@ -14,6 +14,11 @@
         
         data(){
             return {
+                tableData : [
+                    ['1', '2', '3'],
+                    ['4', '5', '6'],
+                    ['7', '8', '9'],
+                ]
             }
         },
         watch : {
@@ -32,7 +37,7 @@
         },
         updated(){
         },
-        beforeDestory(){
+        beforeDestory(){ 
 
         }
         

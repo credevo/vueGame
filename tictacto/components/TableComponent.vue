@@ -1,32 +1,22 @@
 
 <template>
     <table>
-        <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>6</td>
-            <td>7</td>
-            <td>8</td>
-        </tr>
-        <tr>
-            <td>9</td>
-            <td>0</td>
-            <td>11</td>
-            <td>12</td>
-        </tr>
+        <tr-component  v-for="(rowData,index) in tableData" :key="index" :row-data="rowData" :row-index="index"> </tr-component>
     </table>
 </template>
 
 <script>  
-    
+    // import TdComponent from '../components/TdComponent.vue'
+    import TrComponent from './TrComponent.vue'
+
     export default {
-        
-        
+        props : {
+            tableData : Array,
+        },
+        components : {
+            TrComponent,
+            // TdComponent
+        },
         data(){
             return {
             }
