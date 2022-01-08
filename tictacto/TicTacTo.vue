@@ -5,7 +5,11 @@
          @td-test="tdTest"
         />
         <div>현재 trun 은 {{turn}}</div>
-        <div> {{tableArr}}</div>
+        <div> 현재 데이타 는 아래와 같다  </div>
+        <div> {{tableData[0]}}</div>
+        <div> {{tableData[1]}}</div>
+        <div> {{tableData[2]}}</div>
+        <div v-if="winner"> {{winner}} 님의 승리</div>
     </div>
     
 </template>
@@ -26,6 +30,7 @@
                 ],
                 turn : 'O',
                 tableArr : ['','',''],
+                winner : '',
             }
         },
         watch : {

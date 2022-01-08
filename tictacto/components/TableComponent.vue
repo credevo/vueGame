@@ -17,6 +17,7 @@
     import TrComponent from './TrComponent.vue'
 
     export default {
+        name : 'table-component',
         props : {
             tableData : Array,
             
