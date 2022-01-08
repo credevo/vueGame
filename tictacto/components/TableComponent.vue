@@ -1,7 +1,14 @@
 
 <template>
     <table>
-        <tr-component  v-for="(rowData,index) in tableData" :key="index" :row-data="rowData" :row-index="index"> </tr-component>
+        <tr-component  v-for="(rowData,index) in tableData" :key="index"
+         :row-data="rowData" :row-index="index"
+         > </tr-component>
+         <div>
+         <!-- @td-click="$emit('td-click',$event)"
+         @td-test="$emit('td-test',$event)" -->
+             <!-- {{tableObj}} -->
+             </div>
     </table>
 </template>
 
@@ -12,6 +19,8 @@
     export default {
         props : {
             tableData : Array,
+            
+
         },
         components : {
             TrComponent,
@@ -43,3 +52,9 @@
         
     }
 </script>
+<style scoped>
+table {
+    border-collapse: collapse;
+}
+
+</style>

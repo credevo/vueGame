@@ -3,8 +3,11 @@
         <td-component v-for="(cellData,index) in rowData" :key="index" 
             :cell-data="cellData"  
             :row-index="rowIndex" 
-            :cell-index="index"></td-component>
+            :cell-index="index"
+            ></td-component>
     </tr>
+            <!-- @td-click="$emit('td-click',$event)"
+            @td-test="$emit('td-test',$event)" -->
 </template>
 
 <script>
