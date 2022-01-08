@@ -30,7 +30,7 @@
             },
             onClickTd(){
                 if(this.cellData) return;
-                this.$bus.$emit('clickTd',this.rowIndex,this.cellIndex);
+                // this.$bus.$emit('clickTd',this.rowIndex,this.cellIndex);
                 
 
             }

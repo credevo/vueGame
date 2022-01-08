@@ -1,7 +1,9 @@
 import Vue from 'vue';
-import EventBus  from './EventBus.js';
-import TicTacTo from  './TicTacTo.vue'; 
+import store from './store.js';
 
-Vue.prototype.$bus= EventBus;
+import TicTacTo from  './page/TicTacTo.vue'; 
 
-new Vue(TicTacTo).$mount('#root');
+new Vue({
+    render : h=> h(TicTacTo),
+    store,
+}).$mount('#root');

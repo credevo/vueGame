@@ -125,7 +125,7 @@
             }
         },
         created(){
-          this.$bus.$on('clickTd',this.onClickTd);
+        //   this.$bus.$on('clickTd',this.onClickTd);
         },
         mounted(){
         },
