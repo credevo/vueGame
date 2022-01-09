@@ -7,31 +7,94 @@
 </template>
 
 <script>
+    import {
+        SET_WINNER,
+        CLICK_CELL,
+        CHANGE_TURN,
+        RESET_GAME,
+        NO_WINNER,
+        GET_TABLE
+        } from '../../store/table';
+
     export default {
         name : 'td-component',
         props : {
-            cellData : [String,Number],
             rowIndex : Number,
             cellIndex : Number,
         },
+        computed : {
+            // vuex의 state는 computed를 통해서 가져온다.
+            cellData(){
+                return this.$store.state.tableData[this.rowIndex][this.cellIndex];
+            },
+            tableData(){
+                return this.$store.state.tableData;
+            },
+            turn(){
+                return this.$store.state.turn;
+            }
+        },
         methods : {
-            onTest(){
-                this.$emit('td-test',{rowIndex : this.rowIndex, cellIndex : this.cellIndex});
-            },
-            onChange(){
-                // this.$parent.$parent.tableObj = 
-                // this.$emit('td-click',{rowIndex : this.rowIndex, cellIndex : this.cellIndex});
-                /**
-                 * splice으로 사용해도 변동되네 vue 공식 사이트에 적혀있더라
-                 */
-                this.$root.$data.tableData[this.rowIndex].splice(this.cellInex,1,this.$root.$data.turn);
-                //primitive 원시 type은 데이타 반응형으로 작동 하더라.
-                this.$root.$data.turn  = this.$root.$data.turn === 'O'? 'X' : 'O'; 
-            },
             onClickTd(){
                 if(this.cellData) return;
-                // this.$bus.$emit('clickTd',this.rowIndex,this.cellIndex);
-                
+                //
+                const rowIndex = this.rowIndex;
+                const cellIndex = this.cellIndex;
+                //
+                this.$store.commit(CLICK_CELL,{row :rowIndex ,cell :cellIndex});
+                //
+                const currntTurn = this.turn;
+                //다음 턴 으로 변경
+                //
+                let win = false;
+                let winCase = '';
+                //가로 체크
+                if(this.tableData[rowIndex][0] === currntTurn
+                    && this.tableData[rowIndex][1] === currntTurn
+                    && this.tableData[rowIndex][2] === currntTurn
+                ) { win = true;
+                    winCase = '가로';
+                }
+                //세로 체크
+                if(this.tableData[0][cellIndex] === currntTurn 
+                    && this.tableData[1][cellIndex] === currntTurn
+                    && this.tableData[2][cellIndex] === currntTurn
+                ) { win = true;
+                winCase = '세로';}
+                // 대각선 체크1 ↘
+                if(this.tableData[0][0] === currntTurn 
+                    && this.tableData[1][1] === currntTurn
+                    && this.tableData[2][2] === currntTurn
+                ) { win = true;
+                winCase = '대각선 ↘';}
+                // 대각선 체크2 ↙
+                if(this.tableData[0][2] === currntTurn 
+                    && this.tableData[1][1] === currntTurn
+                    && this.tableData[2][0] === currntTurn
+                ) { win = true;
+                winCase = '대각선 ↙';}
+                //이긴 경우
+                if(win){
+                    this.$store.commit('winner',currntTurn);
+                    this.$store.commit(RESET_GAME)
+                // 지거나 무승부
+                }else{
+                    let all = true; //all 이 true면 무승부 라는 뜻
+                    this.tableData.forEach((row)=>{
+                        row.forEach(cell=>{
+                            if(!cell){
+                                all = false;
+                            }
+                        })
+                    });
+                    if(all){ //모두 값이 있다 = 무승부
+                        this.$store.commit(NO_WINNER);
+                        this.$store.commit(RESET_GAME)
+
+                    }else{
+                        this.$store.commit(CHANGE_TURN);
+                    }
+                }
 
             }
         }

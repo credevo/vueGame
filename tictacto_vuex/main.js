@@ -1,9 +1,9 @@
 import Vue from 'vue';
-import store from './store.js';
+import basicStore from './store.js';
 
 import TicTacTo from  './page/TicTacTo.vue'; 
 
 new Vue({
     render : h=> h(TicTacTo),
-    store,
+    store : basicStore,
 }).$mount('#root');

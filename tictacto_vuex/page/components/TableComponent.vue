@@ -1,14 +1,7 @@
 
 <template>
     <table>
-        <tr-component  v-for="(rowData,index) in tableData" :key="index"
-         :row-data="rowData" :row-index="index"
-         > </tr-component>
-         <div>
-         <!-- @td-click="$emit('td-click',$event)"
-         @td-test="$emit('td-test',$event)" -->
-             <!-- {{tableObj}} -->
-             </div>
+        <tr-component  v-for="(rowData,index) in tableData" :key="index" :row-index="index"/>
     </table>
 </template>
 
@@ -18,23 +11,25 @@
 
     export default {
         name : 'table-component',
-        props : {
-            tableData : Array,
-            
-
-        },
         components : {
             TrComponent,
-            // TdComponent
         },
         data(){
             return {
+                // tableData : [
+                //     ['', '', ''],
+                //     ['', '', ''],
+                //     ['', '', ''],
+                // ],
             }
         },
         watch : {
             
         }, 
         computed : {
+           tableData(){
+               return this.$store.state.tableData;
+           }
 
         },
         methods : {

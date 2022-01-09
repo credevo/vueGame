@@ -1,13 +1,10 @@
 <template>
     <tr>
         <td-component v-for="(cellData,index) in rowData" :key="index" 
-            :cell-data="cellData"  
-            :row-index="rowIndex" 
             :cell-index="index"
+            :row-index="rowIndex"
             ></td-component>
     </tr>
-            <!-- @td-click="$emit('td-click',$event)"
-            @td-test="$emit('td-test',$event)" -->
 </template>
 
 <script>
@@ -15,10 +12,14 @@ import TdComponent from './TdComponent.vue'
 export default {
     name : 'tr-component',
     props : {
-        rowData : Array,
         rowIndex : Number,
     },
     components: { TdComponent },
+    computed : {
+        rowData(){
+            return this.$store.state.tableData[this.rowIndex];
+        }
+    }
     
 }
 </script>
