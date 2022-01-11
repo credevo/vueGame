@@ -15,7 +15,6 @@ export const CLICK_CELL = 'CLICK_CELL';
 export const CHANGE_TURN = 'CHANGE_TURN';
 export const RESET_GAME = 'RESET_GAME';
 export const NO_WINNER = 'NO_WINNER';
-export const GET_TABLE = 'GET_TABLE';
 
 export default {
     /**
