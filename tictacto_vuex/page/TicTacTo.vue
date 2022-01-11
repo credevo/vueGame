@@ -4,8 +4,8 @@
         <table>
             <tr v-for="(rowData,rowIndex) in tableData" :key="rowIndex" >
                 <td v-for="(cellData,cellIndex) in rowData" :key="cellIndex" 
-                    @click="onClickTd(rowIndex,cellIndex)">
-                    {{`${cellData}`}}
+                    @click="onClickTd(rowIndex,cellIndex,cellData)">
+                    {{cellData}}
                 </td>
             </tr>
         </table>
@@ -37,8 +37,8 @@
             ...mapState(['tableData','turn','winner'])          
         },
         methods : {
-            onClickTd(rowIndex,cellIndex){
-                if(this.cellData) return;
+            onClickTd(rowIndex,cellIndex,cellData){
+                if(cellData) return;
                 //
                 //
                 this.$store.commit(CLICK_CELL,{row :rowIndex ,cell :cellIndex});
