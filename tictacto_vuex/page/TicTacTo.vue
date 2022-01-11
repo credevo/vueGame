@@ -1,14 +1,14 @@
 
 <template>
     <div>
-        <table>
+        <table-component>
             <tr v-for="(rowData,rowIndex) in tableData" :key="rowIndex" >
                 <td v-for="(cellData,cellIndex) in rowData" :key="cellIndex" 
                     @click="onClickTd(rowIndex,cellIndex,cellData)">
                     {{cellData}}
                 </td>
             </tr>
-        </table>
+        </table-component>
         <div>현재 trun 은 {{turn}}</div>
         <div v-if="winner"> {{winner}} 님의 승리</div>
     </div>
@@ -18,9 +18,10 @@
 <script>  
     import { SET_WINNER, CLICK_CELL,CHANGE_TURN,RESET_GAME,NO_WINNER,GET_TABLE} from '../store/table';
     import { mapState } from 'vuex';
+import TableComponent from './components/TableComponent.vue';
     
     export default {
-        components : {},
+        components : {TableComponent},
         
         data(){
             return {
@@ -110,14 +111,3 @@
         
     }
 </script>
-<style scoped>
-table {
-    border-collapse: collapse;
-}
-td {
-    border: 1px solid black;
-    width : 40px;
-    height : 40px;
-    text-align: center;
-}
-</style>

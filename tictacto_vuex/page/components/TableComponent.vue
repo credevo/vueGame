@@ -1,35 +1,23 @@
 
 <template>
-    <div>
-        
-        <div>
-            {{turnMessage}}
-        </div>
-    </div>
+    <table>
+        <slot/>
+    </table>
 </template>
 
 <script>  
-    import {mapState, mapGetters} from 'vuex';
-    
-    import TrComponent from './TrComponent.vue'
-
     export default {
         name : 'table-component',
         components : {
-            TrComponent,
         },
         data(){
             return {
-                
             }
         },
         watch : {
             
         }, 
         computed : {
-            ...mapState(['tableData']),
-            ...mapGetters(['turnMessage']),
-            // turnMessage
         },
         methods : {
             
@@ -42,12 +30,17 @@
         updated(){
         },
         beforeDestory(){
-
         }
-        
     }
 </script>
 <style scoped>
-
-
+table {
+    border-collapse: collapse;
+}
+td {
+    border: 1px solid black;
+    width : 40px;
+    height : 40px;
+    text-align: center;
+}
 </style>

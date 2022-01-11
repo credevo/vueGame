@@ -7,14 +7,7 @@
 </template>
 
 <script>
-    import {
-        SET_WINNER,
-        CLICK_CELL,
-        CHANGE_TURN,
-        RESET_GAME,
-        NO_WINNER,
-        GET_TABLE
-        } from '../../store/table';
+    
     import {mapState} from 'vuex';
 
     export default {
