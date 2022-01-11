@@ -1,12 +1,18 @@
 
 <template>
-    <table>
-        <tr-component  v-for="(rowData,index) in tableData" :key="index" :row-index="index"/>
-    </table>
+    <div>
+        <table>
+            <tr-component  v-for="(rowData,index) in tableData" :key="index" :row-index="index"/>
+        </table>
+        <div>
+            {{turnMessage}}
+        </div>
+    </div>
 </template>
 
 <script>  
-    // import TdComponent from '../components/TdComponent.vue'
+    import {mapState, mapGetters} from 'vuex';
+    
     import TrComponent from './TrComponent.vue'
 
     export default {
@@ -16,21 +22,16 @@
         },
         data(){
             return {
-                // tableData : [
-                //     ['', '', ''],
-                //     ['', '', ''],
-                //     ['', '', ''],
-                // ],
+                
             }
         },
         watch : {
             
         }, 
         computed : {
-           tableData(){
-               return this.$store.state.tableData;
-           }
-
+            ...mapState(['tableData']),
+            ...mapGetters(['turnMessage']),
+            // turnMessage
         },
         methods : {
             

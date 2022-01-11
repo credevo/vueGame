@@ -15,6 +15,7 @@
         NO_WINNER,
         GET_TABLE
         } from '../../store/table';
+    import {mapState} from 'vuex';
 
     export default {
         name : 'td-component',
@@ -24,15 +25,13 @@
         },
         computed : {
             // vuex의 state는 computed를 통해서 가져온다.
-            cellData(){
-                return this.$store.state.tableData[this.rowIndex][this.cellIndex];
-            },
-            tableData(){
-                return this.$store.state.tableData;
-            },
-            turn(){
-                return this.$store.state.turn;
-            }
+            ...mapState({
+                tableData : state=>state.tableData,
+                turn :  state => state.turn,
+                cellData(state){
+                    return state.tableData[this.rowIndex][this.cellIndex];
+                }
+            }),
         },
         methods : {
             onClickTd(){
@@ -75,7 +74,7 @@
                 winCase = '대각선 ↙';}
                 //이긴 경우
                 if(win){
-                    this.$store.commit('winner',currntTurn);
+                    this.$store.commit(SET_WINNER,currntTurn);
                     this.$store.commit(RESET_GAME)
                 // 지거나 무승부
                 }else{

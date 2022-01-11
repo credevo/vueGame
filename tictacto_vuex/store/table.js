@@ -35,7 +35,7 @@ export default {
      *  vue - computed  
      * */ 
     getters : {
-        
+        turnMessage : state=> state.turn + '님이 할 차례입니다.'
     },
     /**
      * state를 동기적으로 수정 할때

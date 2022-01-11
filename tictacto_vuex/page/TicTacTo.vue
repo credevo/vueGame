@@ -9,7 +9,8 @@
 </template>
 
 <script>  
-    //
+    import { mapState } from 'vuex';
+    
     import TableComponent from './components/TableComponent.vue'
     export default {
         components : {
@@ -25,12 +26,17 @@
             
         }, 
         computed : {
-            turn(){
-                return this.$store.state.turn;
-            },
-            winner(){
-                return this.$store.state.winner;
-            }
+            //vuex mapper
+            //1. object 형태(arrowFunction, function)
+            //2.array 형태
+            ...mapState({
+                turn(state){
+                    return state.turn;  // return state.turn + this.data  this접근가능
+                },
+                winner(state){
+                    return state.winner;
+                }
+            }),
         },
         methods : {
             onClickTd(){
@@ -38,7 +44,6 @@
             }
         },
         created(){
-        //   this.$bus.$on('clickTd',this.onClickTd);
         },
         mounted(){
         },
